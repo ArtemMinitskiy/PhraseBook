@@ -7,12 +7,15 @@
     android:layout_height="match_parent"
     android:paddingBottom="10dp"
     android:paddingTop="10dp"
-    tools:context="com.example.artem.myapplication.MainActivity">
+    tools:context="com.example.artem.phrasebook.MainActivity">
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/recyclerView"></android.support.v7.widget.RecyclerView>
+        android:id="@+id/recyclerView">
+
+    </android.support.v7.widget.RecyclerView>
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab2"
         android:layout_width="wrap_content"
