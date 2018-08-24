@@ -18,19 +18,24 @@ import android.widget.SimpleCursorAdapter;
 import com.example.artem.phrasebook.Database.DatabaseHelper;
 import com.example.artem.phrasebook.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class DictionaryFragment extends Fragment {
     private DatabaseHelper databaseHelper;
     private Cursor cursor;
-    private EditText editText;
-    private ListView listView;
+    @BindView(R.id.search_edit)
+    EditText editText;
+    @BindView(R.id.listView)
+    ListView listView;
     private SimpleCursorAdapter adapter;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.dictionary_layout,null);
-        editText = (EditText) v.findViewById(R.id.search_edit);
-        listView = (ListView) v.findViewById(R.id.listView);
-        return v;
+        View view = inflater.inflate(R.layout.dictionary_layout,null);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override

@@ -12,18 +12,22 @@ import android.view.ViewGroup;
 import com.example.artem.phrasebook.Adapter.TabAdapter;
 import com.example.artem.phrasebook.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class TabFragment extends Fragment {
 
+    @BindView(R.id.tabs)
     public TabLayout tabLayout;
+    @BindView(R.id.viewpager)
     public ViewPager viewPager;
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View x =  inflater.inflate(R.layout.tab_layout,null);
-        tabLayout = (TabLayout) x.findViewById(R.id.tabs);
-        viewPager = (ViewPager) x.findViewById(R.id.viewpager);
+        View view =  inflater.inflate(R.layout.tab_layout,null);
+        ButterKnife.bind(this, view);
 
         viewPager.setAdapter(new TabAdapter(getChildFragmentManager()));
 
@@ -34,7 +38,7 @@ public class TabFragment extends Fragment {
             }
         });
 
-        return x;
+        return view;
 
     }
 

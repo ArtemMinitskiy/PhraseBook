@@ -16,6 +16,9 @@ import com.example.artem.phrasebook.R;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class RecyclerTransitionAdapter extends RecyclerView.Adapter<RecyclerTransitionAdapter.ViewHolder>{
     private List<RecyclerTransitionItem> listItems;
     private Activity activity;
@@ -56,10 +59,11 @@ public class RecyclerTransitionAdapter extends RecyclerView.Adapter<RecyclerTran
         return listItems.size();
     }
     public class ViewHolder extends RecyclerView.ViewHolder{
+        @BindView(R.id.buttonT)
         public Button button;
         public ViewHolder(View itemView) {
             super(itemView);
-            button = (Button) itemView.findViewById(R.id.buttonT);
+            ButterKnife.bind(this, itemView);
         }
     }
 

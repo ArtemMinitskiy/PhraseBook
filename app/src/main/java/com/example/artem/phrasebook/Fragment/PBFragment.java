@@ -28,6 +28,7 @@ public class PBFragment extends Fragment {
     private Cursor cursor;
     private List<RecyclerTransitionItem> listItems;
     private Context context;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

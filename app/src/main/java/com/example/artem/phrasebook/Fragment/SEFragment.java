@@ -28,18 +28,19 @@ public class SEFragment extends Fragment {
     private Cursor cursor;
     private List<RecyclerItem> listItems;
     private Context context;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.se_layout,null);
-        recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
+        View view = inflater.inflate(R.layout.se_layout,null);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         listItems = new ArrayList<>();
         adapter = new RecyclerAdapter(getActivity(), listItems);
         recyclerView.setAdapter(adapter);
         loadDatabase();
-        return v;
+        return view;
     }
 
     public void loadDatabase(){

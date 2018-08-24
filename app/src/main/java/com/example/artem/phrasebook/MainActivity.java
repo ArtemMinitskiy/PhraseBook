@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -18,11 +19,18 @@ import com.example.artem.phrasebook.Fragment.DictionaryFragment;
 import com.example.artem.phrasebook.Fragment.PBFragment;
 import com.example.artem.phrasebook.Fragment.TabFragment;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+    @BindView(R.id.drawerLayout)
     DrawerLayout mDrawerLayout;
+    @BindView(R.id.navLayout)
     NavigationView mNavigationView;
-    FragmentManager mFragmentManager;
-    FragmentTransaction mFragmentTransaction;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    private FragmentManager mFragmentManager;
+    private FragmentTransaction mFragmentTransaction;
     DialogFragment dialogWord;
     DialogFragment dialogPhrase;
     DialogFragment dialogSE;
@@ -31,12 +39,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
         dialogWord = new AlertDialogWord();
         dialogPhrase = new AlertDialogPhrase();
         dialogSE = new AlertDialogSE();
-
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        mNavigationView = (NavigationView) findViewById(R.id.shitstuff) ;
 
         mFragmentManager = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
@@ -65,7 +71,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         });
 
-        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout, toolbar,R.string.app_name, R.string.app_name);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();

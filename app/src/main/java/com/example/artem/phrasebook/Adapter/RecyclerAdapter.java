@@ -18,6 +18,9 @@ import com.example.artem.phrasebook.R;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
     private List<RecyclerItem> listItems;
@@ -76,15 +79,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
+        @BindView(R.id.txtEng)
         public TextView txtEng;
+        @BindView(R.id.txtUkr)
         public TextView txtUkr;
+        @BindView(R.id.txtOption)
         public TextView Option;
         public ViewHolder(View itemView) {
             super(itemView);
-            txtEng = (TextView) itemView.findViewById(R.id.txtEng);
-            txtUkr = (TextView) itemView.findViewById(R.id.txtUkr);
-            Option = (TextView) itemView.findViewById(R.id.txtOption);
+            ButterKnife.bind(this, itemView);
 
         }
 

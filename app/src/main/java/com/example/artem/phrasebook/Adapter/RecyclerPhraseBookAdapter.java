@@ -12,6 +12,9 @@ import com.example.artem.phrasebook.R;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class RecyclerPhraseBookAdapter extends RecyclerView.Adapter<RecyclerPhraseBookAdapter.ViewHolder>{
     private List<RecyclerPhraseBookItem> listItems;
     private Activity activity;
@@ -40,12 +43,13 @@ public class RecyclerPhraseBookAdapter extends RecyclerView.Adapter<RecyclerPhra
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+        @BindView(R.id.txtTitle)
         public TextView txtTitle;
+        @BindView(R.id.txtDescription)
         public TextView txtDescription;
         public ViewHolder(View itemView) {
             super(itemView);
-            txtTitle = (TextView) itemView.findViewById(R.id.txtTitle);
-            txtDescription = (TextView) itemView.findViewById(R.id.txtDescription);
+            ButterKnife.bind(this, itemView);
         }
     }
 }
