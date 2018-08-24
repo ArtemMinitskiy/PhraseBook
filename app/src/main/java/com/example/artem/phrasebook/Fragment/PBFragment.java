@@ -24,28 +24,24 @@ import java.util.List;
 public class PBFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerTransitionAdapter adapter;
-//    private FragmentTransaction fragmentTransaction;
     private DatabaseHelper databaseHelper;
     private Cursor cursor;
     private List<RecyclerTransitionItem> listItems;
     private Context context;
-    FragmentManager fragmentManager ;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.pb_layout,null);
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
-        // если мы уверены, что изменения в контенте не изменят размер layout-а RecyclerView
-        // передаем параметр true - это увеличивает производительность
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));//Необходим для работы с методами адаптера?
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
         listItems = new ArrayList<>();
-        //Set adapter
         adapter = new RecyclerTransitionAdapter(listItems, getActivity());
         recyclerView.setAdapter(adapter);
         loadDatabase();
         return v;
     }
+
     public void loadDatabase(){
         databaseHelper = new DatabaseHelper(getActivity());
         try {

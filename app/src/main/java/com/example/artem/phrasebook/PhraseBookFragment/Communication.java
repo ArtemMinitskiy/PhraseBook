@@ -26,22 +26,21 @@ public class Communication extends Fragment {
     private Cursor cursor;
     private List<RecyclerPhraseBookItem> listItems;
     private Context context;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.phrasebook_layout,null);
-        recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
-        // если мы уверены, что изменения в контенте не изменят размер layout-а RecyclerView
-        // передаем параметр true - это увеличивает производительность
+        View view = inflater.inflate(R.layout.phrasebook_layout,null);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));//Необходим для работы с методами адаптера?
         listItems = new ArrayList<>();
-        //Set adapter
         adapter = new RecyclerPhraseBookAdapter(listItems, getActivity());
         recyclerView.setAdapter(adapter);
         loadDatabase();
-        return v;
+        return view;
     }
+
     public void loadDatabase(){
         databaseHelper = new DatabaseHelper(getActivity());
         databaseHelper.openDatabase();

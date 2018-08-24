@@ -15,10 +15,6 @@ public class TabAdapter extends FragmentPagerAdapter {
         super(fm);
     }
 
-    /**
-     * Return fragment with respect to Position .
-     */
-
     @Override
     public Fragment getItem(int position)
     {
@@ -30,16 +26,11 @@ public class TabAdapter extends FragmentPagerAdapter {
         return null;
     }
 
-
     @Override
     public int getCount() {
         return int_items;
 
     }
-
-    /**
-     * This method returns the title of the tab according to the position.
-     */
 
     @Override
     public CharSequence getPageTitle(int position) {

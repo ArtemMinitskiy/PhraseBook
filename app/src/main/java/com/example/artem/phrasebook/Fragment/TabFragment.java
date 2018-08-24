@@ -21,24 +21,11 @@ public class TabFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //Чтобы привязать фрагмент к определенной разметке нужно определить в нем метод onCreateView(). Этот метод возвращает View, которому и принадлежит ваш фрагмент.
-        /**
-         *Inflate tab_layout and setup Views.
-         */
         View x =  inflater.inflate(R.layout.tab_layout,null);
         tabLayout = (TabLayout) x.findViewById(R.id.tabs);
         viewPager = (ViewPager) x.findViewById(R.id.viewpager);
 
-        /**
-         *Set an Apater for the View Pager
-         */
-        viewPager.setAdapter(new TabAdapter(getChildFragmentManager()));//Используя адаптер Возвращаем private FragmentManager для размещения и управления фрагментами внутри этого фрагмента.
-
-        /**
-         * Now , this is a workaround ,
-         * The setupWithViewPager dose't works without the runnable .
-         * Maybe a Support Library Bug .
-         */
+        viewPager.setAdapter(new TabAdapter(getChildFragmentManager()));
 
         tabLayout.post(new Runnable() {
             @Override

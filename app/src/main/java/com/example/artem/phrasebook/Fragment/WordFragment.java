@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class WordFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerAdapter adapter;
@@ -33,18 +32,15 @@ public class WordFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.word_layout,null);
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
-        // если мы уверены, что изменения в контенте не изменят размер layout-а RecyclerView
-        // передаем параметр true - это увеличивает производительность
-
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));//Необходим для работы с методами адаптера?
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
         listItems = new ArrayList<>();
-        //Set adapter
         adapter = new RecyclerAdapter(getActivity().getApplicationContext(), listItems);
         recyclerView.setAdapter(adapter);
         loadDatabase();
         return v;
     }
+
     public void loadDatabase(){
         databaseHelper = new DatabaseHelper(getActivity());
         try {
@@ -54,7 +50,6 @@ public class WordFragment extends Fragment {
         }
         databaseHelper.openDatabase();
             cursor = databaseHelper.QueryData("select * from phrasebook where id_theme = 1");
-//            cursor = databaseHelper.QueryData("select phrasebook.phrase, phrasebook.translate from phrasebook, theme where phrasebook.id_theme = theme._id and theme.theme = Word");
             if (cursor != null) {
                 if (cursor.moveToFirst()) {
                     do {

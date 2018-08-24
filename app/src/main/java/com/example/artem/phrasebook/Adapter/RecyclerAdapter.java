@@ -5,7 +5,6 @@ import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,10 +28,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         this.listItems = listItems;
 
     }
-    public void dataChanged( List<RecyclerItem> list){
-        listItems = list;
-        notifyDataSetChanged();
-    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -49,7 +44,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                         holder.Option.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                //Display option menu
                                 final DialogFragment deleteDialog = new AlertDialogDeleteWord().newInstance(s);
                                 final DialogFragment editDialog = new AlertDialogEditWord().newInstance(s);
                                 PopupMenu popupMenu = new PopupMenu(context, holder.Option);
@@ -60,17 +54,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                                         switch (item.getItemId()) {
                                             case R.id.edit:
                                                 editDialog.show(((AppCompatActivity) context).getFragmentManager(), "");
-//                                                Toast.makeText(context, "Edited", Toast.LENGTH_LONG).show();
-//                                                notifyDataSetChanged();
-//                                                notifyItemChanged(position);
                                                 break;
                                             case R.id.delete:
-                                                //Delete item
                                                 deleteDialog.show(((AppCompatActivity) context).getFragmentManager(), "");
                                                 listItems.remove(position);
-                                                Log.d("Log", "" + s);
-//                                                notifyItemRemoved(position);
-//                                                Toast.makeText(context, "Deleted", Toast.LENGTH_LONG).show();
                                                 break;
                                             default:
                                                 break;

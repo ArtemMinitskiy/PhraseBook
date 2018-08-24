@@ -18,7 +18,6 @@ import android.widget.SimpleCursorAdapter;
 import com.example.artem.phrasebook.Database.DatabaseHelper;
 import com.example.artem.phrasebook.R;
 
-
 public class DictionaryFragment extends Fragment {
     private DatabaseHelper databaseHelper;
     private Cursor cursor;
@@ -43,25 +42,21 @@ public class DictionaryFragment extends Fragment {
             String[] headers = new String[]{"phrase", "translate"};
             adapter = new SimpleCursorAdapter(getContext(), android.R.layout.two_line_list_item,
                     cursor, headers, new int[]{android.R.id.text1, android.R.id.text2}, 0);
-            // установка слушателя изменения текста
             editText.addTextChangedListener(new TextWatcher() {
 
                 public void afterTextChanged(Editable s) {
                 }
                 public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 }
-                // при изменении текста выполняем фильтрацию
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
                     adapter.getFilter().filter(s.toString());
                 }
             });
 
-            // устанавливаем провайдер фильтрации
             adapter.setFilterQueryProvider(new FilterQueryProvider() {
                 @Override
                 public Cursor runQuery(CharSequence constraint) {
                     if (constraint == null || constraint.length() == 0) {
-//                        return databaseHelper.database.rawQuery("select * from " + "dictionary", null);
                         return databaseHelper.database.rawQuery("select * from " + "phrasebook" + " where " + "id_theme = 14 and " +
                                 "phrase" + " like ?", new String[]{"%" + constraint.toString() + "%"} );
                     }

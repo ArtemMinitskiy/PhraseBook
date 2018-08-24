@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class SEFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -42,6 +41,7 @@ public class SEFragment extends Fragment {
         loadDatabase();
         return v;
     }
+
     public void loadDatabase(){
         databaseHelper = new DatabaseHelper(getActivity());
         try {

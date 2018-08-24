@@ -26,19 +26,21 @@ public class Farewell extends Fragment {
     private Cursor cursor;
     private List<RecyclerPhraseBookItem> listItems;
     private Context context;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.phrasebook_layout,null);
-        recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
+        View view = inflater.inflate(R.layout.phrasebook_layout,null);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         listItems = new ArrayList<>();
         adapter = new RecyclerPhraseBookAdapter(listItems, getActivity());
         recyclerView.setAdapter(adapter);
         loadDatabase();
-        return v;
+        return view;
     }
+
     public void loadDatabase(){
         databaseHelper = new DatabaseHelper(getActivity());
         databaseHelper.openDatabase();

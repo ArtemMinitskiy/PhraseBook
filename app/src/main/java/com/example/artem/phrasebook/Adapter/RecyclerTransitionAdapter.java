@@ -16,7 +16,6 @@ import com.example.artem.phrasebook.R;
 
 import java.util.List;
 
-
 public class RecyclerTransitionAdapter extends RecyclerView.Adapter<RecyclerTransitionAdapter.ViewHolder>{
     private List<RecyclerTransitionItem> listItems;
     private Activity activity;
@@ -43,7 +42,6 @@ public class RecyclerTransitionAdapter extends RecyclerView.Adapter<RecyclerTran
             public void onClick(View v) {
                         switch (v.getId()) {
                             case R.id.buttonT:
-                                Log.d("Log", "" + id + " " + s1);
                                 helper.replaceFragment(id);
                                 break;
                             default:

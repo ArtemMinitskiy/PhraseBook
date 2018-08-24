@@ -24,7 +24,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.myContext = context;
         try {
-            //получаем путь до БД вместе с именем.
             DB_PATH = myContext.getDatabasePath(DATABASE_NAME).toString();
             checkAndCopyDatabase();
             openDatabase();
@@ -52,11 +51,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private boolean checkDataBase(){
         SQLiteDatabase checkDB = null;
         try {
-
             checkDB = SQLiteDatabase.openDatabase(DB_PATH, null, SQLiteDatabase.OPEN_READONLY);
         }
         catch (SQLiteException e) {
-            // база не существует
         }
         if (checkDB != null) {
             checkDB.close();

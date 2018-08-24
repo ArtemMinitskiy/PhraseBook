@@ -12,15 +12,15 @@ import com.example.artem.phrasebook.Database.DatabaseHelper;
 import com.example.artem.phrasebook.R;
 
 public class AlertDialogEditWord extends DialogFragment implements View.OnClickListener {
-    DatabaseHelper databaseHelper;
-    String Eng, Ukr;
+    public DatabaseHelper databaseHelper;
+    private String Eng, Ukr;
     View view = null;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         databaseHelper = new DatabaseHelper(getActivity());
         view = inflater.inflate(R.layout.edit_dialog, null);
-        view.findViewById(R.id.button).setOnClickListener(this);
-        view.findViewById(R.id.button2).setOnClickListener(this);
+        view.findViewById(R.id.edit).setOnClickListener(this);
+        view.findViewById(R.id.cancel).setOnClickListener(this);
         return view;
     }
 
@@ -44,14 +44,11 @@ public class AlertDialogEditWord extends DialogFragment implements View.OnClickL
         Eng = editText.getText().toString();
         Ukr = editText2.getText().toString();
         switch (v.getId()) {
-            case R.id.button:
+            case R.id.edit:
                 databaseHelper.editItemWord(id, Eng, Ukr);
-                Log.d("Log", Eng + " " + Ukr);
-                Log.d("Log", "Ok");
                 dismiss();
                 break;
-            case R.id.button2:
-                Log.d("Log", "Cancel");
+            case R.id.cancel:
                 dismiss();
                 break;
             default:
