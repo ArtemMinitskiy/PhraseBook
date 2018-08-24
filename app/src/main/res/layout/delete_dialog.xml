@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:layout_width="175dp"
+        android:layout_height="100dp"
+        android:text="@string/delete"
+        android:id="@+id/button"
+        style="?android:attr/borderlessButtonStyle"
+        android:textColor="#ffaa00"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="true" />
+    <Button
+        android:layout_width="175dp"
+        android:layout_height="100dp"
+        android:text="@string/close"
+        android:id="@+id/button2"
+        style="?android:attr/borderlessButtonStyle"
+        android:textColor="#ffaa00"
+        android:layout_alignTop="@+id/button"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>
