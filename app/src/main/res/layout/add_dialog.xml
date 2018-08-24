@@ -55,7 +55,7 @@
         android:text="@string/add"
         android:id="@+id/add"
         style="?android:attr/borderlessButtonStyle"
-        android:textColor="#ffaa00"
+        android:textColor="@color/darkBlue"
         android:layout_marginTop="24dp"
         android:layout_below="@+id/editText2"
         android:layout_alignParentStart="false" />
@@ -65,7 +65,7 @@
         android:text="@string/close"
         android:id="@+id/cancel"
         style="?android:attr/borderlessButtonStyle"
-        android:textColor="#ffaa00"
+        android:textColor="@color/darkBlue"
         android:layout_alignTop="@+id/add"
         android:layout_alignParentEnd="true" />
 

@@ -9,12 +9,12 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:text="Button"
-        android:textColor="#543c0c"
+        android:textColor="#000000"
         android:id="@+id/buttonT"
         style="?android:attr/borderlessButtonStyle"
         android:elevation="4dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/frame_orange_light"
+        android:background="@drawable/frame_cyan"
         android:textStyle="bold|italic"
         android:textSize="25dp" />
 

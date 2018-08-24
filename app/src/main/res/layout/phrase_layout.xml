@@ -26,7 +26,7 @@
         android:layout_marginBottom="4dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:background="@color/orange"
-        app:backgroundTint="#FA0"
+        android:background="@color/blue"
+        app:backgroundTint="@color/darkBlue"
         android:onClick="onClick" />
 </RelativeLayout>
