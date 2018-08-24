@@ -1,3 +1,21 @@
 <resources>
-    <string name="app_name">PhraseBook</string>
+        <string name="app_name">Розмовник</string>
+        <string name="dictionary">Словник</string>
+        <string name="myphrasebook">Мій розмовник</string>
+        <string name="phrasebook">Розмовник</string>
+        <string name="settings">Налаштування</string>
+        <string name="about">Про програму</string>
+        <string name="word">Слова</string>
+        <string name="phrase">Фрази</string>
+        <string name="se">СтійкіВирази</string>
+        <string name="name">Артем Мініцький</string>
+        <string name="appName">Україно-Англійський Розмовник</string>
+        <string name="ukrDialog">Укр</string>
+        <string name="engDialog">Англ</string>
+        <string name="add">Додати</string>
+        <string name="edit">Змінити</string>
+        <string name="delete">Видалити</string>
+        <string name="close">Закрити</string>
+        <string name="record">Видалити цей запис?</string>
+        <string name="search">Пошук</string>
 </resources>
