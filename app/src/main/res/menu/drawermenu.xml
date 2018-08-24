@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/myphrasebook"
+        android:id="@+id/nav_main"
+        android:icon="@drawable/ic_action_send_now"/>
+
+    <item android:title="@string/dictionary"
+        android:id="@+id/nav_item_dictionary"
+        android:icon="@drawable/ic_action_view_as_list"/>
+
+    <item android:title="@string/phrasebook"
+        android:id="@+id/nav_item_phrasebook"
+        android:icon="@drawable/ic_action_cc_bcc"/>
+
+
+    <group android:id="@+id/group_settings_id">
+
+        <item android:title="@string/about"
+            android:id="@+id/nav_item_about"
+            android:icon="@drawable/ic_action_about"/>
+    </group>
+</menu>
