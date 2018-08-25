@@ -18,7 +18,6 @@ public class AlertDialogDeleteWord extends DialogFragment implements View.OnClic
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         databaseHelper = new DatabaseHelper(getActivity());
         View view = inflater.inflate(R.layout.delete_dialog, null);
-        getDialog().setTitle(getResources().getString(R.string.record));
         view.findViewById(R.id.delete).setOnClickListener(this);
         view.findViewById(R.id.cancel).setOnClickListener(this);
         return view;

@@ -2,7 +2,6 @@ package com.example.artem.phrasebook.AlertDialog;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,8 +38,8 @@ public class AlertDialogEditWord extends DialogFragment implements View.OnClickL
 
     public void onClick(View v) {
         int id = getArguments().getInt("id");
-        EditText editText = (EditText) view.findViewById(R.id.editText);
-        EditText editText2 = (EditText) view.findViewById(R.id.editText2);
+        EditText editText = (EditText) view.findViewById(R.id.editEng);
+        EditText editText2 = (EditText) view.findViewById(R.id.editUkr);
         Eng = editText.getText().toString();
         Ukr = editText2.getText().toString();
         switch (v.getId()) {

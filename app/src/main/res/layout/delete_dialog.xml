@@ -5,23 +5,58 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:layout_width="175dp"
+    <LinearLayout
+        android:id="@+id/linear_layout"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:text="@string/delete"
-        android:id="@+id/delete"
-        style="?android:attr/borderlessButtonStyle"
-        android:textColor="@color/darkBlue"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentTop="true" />
-    <Button
-        android:layout_width="175dp"
-        android:layout_height="100dp"
-        android:text="@string/close"
-        android:id="@+id/cancel"
-        style="?android:attr/borderlessButtonStyle"
-        android:textColor="@color/darkBlue"
-        android:layout_alignTop="@+id/delete"
-        android:layout_alignParentEnd="true" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="10dp"
+            android:text="Видалення запису"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Якщо ви бажаете видалити запис натисніть Видалити."
+            android:paddingLeft="5dp"
+            android:textSize="15sp"
+
+            />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="false"
+        android:layout_alignWithParentIfMissing="false"
+        android:layout_below="@+id/linear_layout">
+
+        <Button
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="@string/delete"
+            android:id="@+id/delete"
+            style="?android:attr/borderlessButtonStyle"
+            android:textColor="@color/darkBlue"
+            android:layout_marginTop="2dp"
+            android:layout_marginLeft="90dp" />
+        <Button
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="@string/close"
+            android:id="@+id/cancel"
+            style="?android:attr/borderlessButtonStyle"
+            android:textColor="@color/darkBlue"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
 
 </RelativeLayout>
