@@ -44,7 +44,7 @@ public class AlertDialogEditWord extends DialogFragment implements View.OnClickL
         Ukr = editText2.getText().toString();
         switch (v.getId()) {
             case R.id.edit:
-                databaseHelper.editItemWord(id, Eng, Ukr);
+//                databaseHelper.editItemWord(id, Eng, Ukr);
                 dismiss();
                 break;
             case R.id.cancel:

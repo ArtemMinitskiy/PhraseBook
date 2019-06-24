@@ -45,12 +45,13 @@ public class SEFragment extends Fragment {
 
     public void loadDatabase(){
         databaseHelper = new DatabaseHelper(getActivity());
-        try {
-            databaseHelper.checkAndCopyDatabase();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        databaseHelper.openDatabase();
+//        try {
+//            databaseHelper.checkAndCopyDatabase();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        databaseHelper.openDatabase();
+        databaseHelper.openDataBase();
         cursor = databaseHelper.QueryData("select * from phrasebook where id_theme = 3");
         if (cursor != null) {
             if (cursor.moveToFirst()) {

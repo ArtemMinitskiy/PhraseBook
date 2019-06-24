@@ -16,16 +16,16 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtTitle"
-                android:text="Title"
+                android:id="@+id/ukrWord"
+                android:text="@string/ukrWord"
                 android:textAppearance="?android:textAppearanceLarge"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtDescription"
-                android:text="Description"
+                android:id="@+id/engWord"
+                android:text="@string/engWord"
                 android:textAppearance="?android:textAppearanceMedium"
-                android:layout_below="@id/txtTitle"/>
+                android:layout_below="@id/ukrWord"/>
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

@@ -40,7 +40,7 @@ public class AlertDialogDeleteWord extends DialogFragment implements View.OnClic
         int id = getArguments().getInt("id");
         switch (v.getId()) {
             case R.id.delete:
-                databaseHelper.deleteWordById(id);
+//                databaseHelper.deleteWordById(id);
                 dismiss();
                 break;
             case R.id.cancel:

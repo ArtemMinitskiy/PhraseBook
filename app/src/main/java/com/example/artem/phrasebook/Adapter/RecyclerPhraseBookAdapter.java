@@ -32,8 +32,8 @@ public class RecyclerPhraseBookAdapter extends RecyclerView.Adapter<RecyclerPhra
 
     @Override
     public void onBindViewHolder(final ViewHolder holder,final int position) {
-        holder.txtTitle.setText(listItems.get(position).getPhrase());
-        holder.txtDescription.setText(listItems.get(position).getTranslate());
+        holder.txtUkrWord.setText(listItems.get(position).getPhrase());
+        holder.txtEngWord.setText(listItems.get(position).getTranslate());
 
     }
 
@@ -43,10 +43,10 @@ public class RecyclerPhraseBookAdapter extends RecyclerView.Adapter<RecyclerPhra
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        @BindView(R.id.txtTitle)
-        public TextView txtTitle;
-        @BindView(R.id.txtDescription)
-        public TextView txtDescription;
+        @BindView(R.id.ukrWord)
+        public TextView txtUkrWord;
+        @BindView(R.id.engWord)
+        public TextView txtEngWord;
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

@@ -19,4 +19,6 @@
         <string name="record">Видалити цей запис?</string>
         <string name="search">Пошук</string>
         <string name="email">MinitskyiArtem@gmail.com</string>
+        <string name="ukrWord">Ukrainian Word</string>
+        <string name="engWord">English Word</string>
 </resources>

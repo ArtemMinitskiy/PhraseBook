@@ -61,16 +61,17 @@ public class DictionaryFragment extends Fragment {
     private void readFromDB() {
         String searchWord = searchEdit.getText().toString();
         databaseHelper = new DatabaseHelper(getActivity());
-        try {
-            databaseHelper.checkAndCopyDatabase();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        databaseHelper.openDatabase();
+//        try {
+//            databaseHelper.checkAndCopyDatabase();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        databaseHelper.openDatabase();
+        databaseHelper.openDataBase();
 
         String[] selectionArgs = {"%" + searchWord + "%"};
 
-        cursor = databaseHelper.database.rawQuery("select * from " + "phrasebook" + " where " + "id_theme = 14 and " +
+        cursor = databaseHelper.mDataBase.rawQuery("select * from " + "phrasebook" + " where " + "id_theme = 14 and " +
                 "phrase" + String.format(" like ?"), selectionArgs);
         recyclerView.setAdapter(new RecyclerDictionaryAdapter(context, cursor));
     }

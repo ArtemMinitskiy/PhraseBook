@@ -29,7 +29,7 @@ public class AlertDialogPhrase extends DialogFragment implements View.OnClickLis
         Ukr = editText2.getText().toString();
         switch (v.getId()) {
             case R.id.add:
-                databaseHelper.addItemPhrase(Eng, Ukr);
+//                databaseHelper.addItemPhrase(Eng, Ukr);
                 dismiss();
                 break;
             case R.id.cancel:

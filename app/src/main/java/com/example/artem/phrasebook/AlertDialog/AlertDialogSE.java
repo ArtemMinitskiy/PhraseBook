@@ -30,7 +30,7 @@ public class AlertDialogSE extends DialogFragment implements View.OnClickListene
         Ukr = editText2.getText().toString();
         switch (v.getId()) {
             case R.id.add:
-                databaseHelper.addItemSE(Eng, Ukr);
+//                databaseHelper.addItemSE(Eng, Ukr);
                 dismiss();
                 break;
             case R.id.cancel:

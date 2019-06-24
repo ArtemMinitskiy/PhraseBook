@@ -5,7 +5,9 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,23 +23,27 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PBFragment extends Fragment {
+public class PhraseBookThemeFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerTransitionAdapter adapter;
     private DatabaseHelper databaseHelper;
     private Cursor cursor;
     private List<RecyclerTransitionItem> listItems;
+    private FragmentActivity fragmentActivity;
+    private FragmentTransaction fragmentTransaction;
     private Context context;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.pb_layout,null);
+        fragmentActivity = getActivity();
+        fragmentTransaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
         recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         listItems = new ArrayList<>();
-        adapter = new RecyclerTransitionAdapter(listItems, getActivity());
+        adapter = new RecyclerTransitionAdapter(listItems, getActivity(), fragmentTransaction);
         recyclerView.setAdapter(adapter);
         loadDatabase();
         return v;
@@ -45,12 +51,13 @@ public class PBFragment extends Fragment {
 
     public void loadDatabase(){
         databaseHelper = new DatabaseHelper(getActivity());
-        try {
-            databaseHelper.checkAndCopyDatabase();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        databaseHelper.openDatabase();
+//        try {
+//            databaseHelper.checkAndCopyDatabase();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        databaseHelper.openDatabase();
+        databaseHelper.openDataBase();
         cursor = databaseHelper.QueryData("select * from theme");
         if (cursor != null) {
             if (cursor.moveToFirst()) {

@@ -30,7 +30,7 @@ public class AlertDialogWord extends DialogFragment implements View.OnClickListe
         Ukr = editText2.getText().toString();
         switch (v.getId()) {
             case R.id.add:
-                databaseHelper.addItemWord(Eng, Ukr);
+//                databaseHelper.addItemWord(Eng, Ukr);
                 dismiss();
                 break;
             case R.id.cancel:

@@ -7,134 +7,103 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
+import com.example.artem.phrasebook.R;
+
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    private static String DB_PATH;
-    private static final String DATABASE_NAME = "PhraseBook.sqlite";
-    private static final int DATABASE_VERSION = 3;
-    public SQLiteDatabase database;
-    private Context myContext;
+private static String DB_NAME = "PhraseBook.sqlite";
+    private static String DB_PATH = "";
+    private static final int DB_VERSION = 1;
+
+    public SQLiteDatabase mDataBase;
+    private final Context mContext;
+    private boolean mNeedUpdate = false;
 
     public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        this.myContext = context;
-        try {
-            DB_PATH = myContext.getDatabasePath(DATABASE_NAME).toString();
-            checkAndCopyDatabase();
-            openDatabase();
-        } catch (IOException e) {
-            e.printStackTrace();
+        super(context, DB_NAME, null, DB_VERSION);
+        if (android.os.Build.VERSION.SDK_INT >= 17)
+            DB_PATH = context.getApplicationInfo().dataDir + "/databases/";
+        else
+            DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
+        this.mContext = context;
+
+        copyDataBase();
+
+        this.getReadableDatabase();
+    }
+
+    public void updateDataBase() throws IOException {
+        if (mNeedUpdate) {
+            File dbFile = new File(DB_PATH + DB_NAME);
+            if (dbFile.exists())
+                dbFile.delete();
+
+            copyDataBase();
+
+            mNeedUpdate = false;
         }
     }
 
+    private boolean checkDataBase() {
+        File dbFile = new File(DB_PATH + DB_NAME);
+        return dbFile.exists();
+    }
 
-    public void checkAndCopyDatabase() throws IOException {
-
-        boolean dbExist = checkDataBase();
-
-        if (!dbExist) {
+    private void copyDataBase() {
+        if (!checkDataBase()) {
             this.getReadableDatabase();
+            this.close();
             try {
-                copyDataBase();
+                copyDBFile();
+            } catch (IOException mIOException) {
+                throw new Error("ErrorCopyingDataBase");
             }
-            catch (IOException e) {
-                throw new Error("Error copying database");
-            }
         }
     }
 
-    private boolean checkDataBase(){
-        SQLiteDatabase checkDB = null;
-        try {
-            checkDB = SQLiteDatabase.openDatabase(DB_PATH, null, SQLiteDatabase.OPEN_READONLY);
-        }
-        catch (SQLiteException e) {
-        }
-        if (checkDB != null) {
-            checkDB.close();
-        }
-        return checkDB != null;
+    private void copyDBFile() throws IOException {
+        InputStream mInput = mContext.getAssets().open(DB_NAME);
+        OutputStream mOutput = new FileOutputStream(DB_PATH + DB_NAME);
+        byte[] mBuffer = new byte[1024];
+        int mLength;
+        while ((mLength = mInput.read(mBuffer)) > 0)
+            mOutput.write(mBuffer, 0, mLength);
+        mOutput.flush();
+        mOutput.close();
+        mInput.close();
     }
 
-    private void copyDataBase() throws IOException {
-        InputStream myInput = myContext.getAssets().open(DATABASE_NAME);
-        String outFileName = DB_PATH;
-        OutputStream myOutput = new FileOutputStream(outFileName);
-        byte[] buffer = new byte[1024];
-        int length;
-        while ((length = myInput.read(buffer))>0){
-            myOutput.write(buffer, 0, length);
-        }
-        myOutput.flush();
-        myOutput.close();
-        myInput.close();
-    }
-
-    public void openDatabase() throws SQLException {
-        database = SQLiteDatabase.openDatabase(DB_PATH, null, SQLiteDatabase.OPEN_READWRITE);
+    public boolean openDataBase() throws SQLException {
+        mDataBase = SQLiteDatabase.openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.CREATE_IF_NECESSARY);
+        return mDataBase != null;
     }
 
     @Override
     public synchronized void close() {
-        if(database != null)
-            database.close();
+        if (mDataBase != null)
+            mDataBase.close();
         super.close();
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        if (newVersion > oldVersion)
+            mNeedUpdate = true;
     }
 
     public Cursor QueryData(String query){
-        return database.rawQuery(query,null);
+        return mDataBase.rawQuery(query,null);
     }
-
-    public void addItemWord(String Eng, String Ukr) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("phrase", Eng);
-        contentValues.put("translate", Ukr);
-        contentValues.put("id_theme", "1");
-        database.insert("phrasebook", null, contentValues);
-    }
-
-    public boolean deleteWordById(int id) {
-        openDatabase();
-        int result = database.delete("phrasebook", "_id = ?", new String[]{String.valueOf(id)});
-        close();
-        return result !=0;
-    }
-
-    public void editItemWord(int id, String Eng, String Ukr) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("phrase", Eng);
-        contentValues.put("translate", Ukr);
-        database.update("phrasebook", contentValues, "_id = ?", new String[]{String.valueOf(id)});
-    }
-
-    public void addItemPhrase(String Eng, String Ukr) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("phrase", Eng);
-        contentValues.put("translate", Ukr);
-        contentValues.put("id_theme", "2");
-        database.insert("phrasebook", null, contentValues);
-    }
-
-    public void addItemSE(String Eng, String Ukr) {
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("phrase", Eng);
-        contentValues.put("translate", Ukr);
-        contentValues.put("id_theme", "3");
-        database.insert("phrasebook", null, contentValues);
-    }
-
 }

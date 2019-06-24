@@ -16,7 +16,7 @@ import com.example.artem.phrasebook.AlertDialog.AlertDialogPhrase;
 import com.example.artem.phrasebook.AlertDialog.AlertDialogSE;
 import com.example.artem.phrasebook.AlertDialog.AlertDialogWord;
 import com.example.artem.phrasebook.Fragment.DictionaryFragment;
-import com.example.artem.phrasebook.Fragment.PBFragment;
+import com.example.artem.phrasebook.Fragment.PhraseBookThemeFragment;
 import com.example.artem.phrasebook.Fragment.TabFragment;
 
 import butterknife.BindView;
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 if (menuItem.getItemId() == R.id.nav_item_phrasebook) {
                     FragmentTransaction pbfragmentTransaction = mFragmentManager.beginTransaction();
-                    pbfragmentTransaction.replace(R.id.containerView,new PBFragment()).addToBackStack(null).commit();
+                    pbfragmentTransaction.replace(R.id.containerView,new PhraseBookThemeFragment()).addToBackStack(null).commit();
                 }
 
                 if (menuItem.getItemId() == R.id.nav_main) {

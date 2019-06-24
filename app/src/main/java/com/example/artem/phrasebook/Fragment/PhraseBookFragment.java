@@ -1,4 +1,4 @@
-package com.example.artem.phrasebook.PhraseBookFragment;
+package com.example.artem.phrasebook.Fragment;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.artem.phrasebook.Adapter.RecyclerPhraseBookAdapter;
+import com.example.artem.phrasebook.Adapter.RecyclerTransitionAdapter;
 import com.example.artem.phrasebook.Database.DatabaseHelper;
 import com.example.artem.phrasebook.Item.RecyclerPhraseBookItem;
 import com.example.artem.phrasebook.R;
@@ -19,9 +20,10 @@ import com.example.artem.phrasebook.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InTheCity extends Fragment {
+public class PhraseBookFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerPhraseBookAdapter adapter;
+    private RecyclerTransitionAdapter adapterT;
     private DatabaseHelper databaseHelper;
     private Cursor cursor;
     private List<RecyclerPhraseBookItem> listItems;
@@ -32,19 +34,22 @@ public class InTheCity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.phrasebook_layout,null);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         listItems = new ArrayList<>();
         adapter = new RecyclerPhraseBookAdapter(listItems, getActivity());
         recyclerView.setAdapter(adapter);
+
         loadDatabase();
         return view;
     }
 
     public void loadDatabase(){
+        int id = getArguments().getInt("id");
         databaseHelper = new DatabaseHelper(getActivity());
-        databaseHelper.openDatabase();
-        cursor = databaseHelper.QueryData("select * from phrasebook where id_theme = 9");
+        databaseHelper.openDataBase();
+        cursor = databaseHelper.QueryData("select * from phrasebook where id_theme = " + id);
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
@@ -54,5 +59,18 @@ public class InTheCity extends Fragment {
             }
         }
 
+    }
+
+    @Override
+    public void setArguments(Bundle args) {
+        super.setArguments(args);
+    }
+
+    public Fragment newInstance(int id) {
+        PhraseBookFragment phraseBookFragment = new PhraseBookFragment();
+        Bundle args = new Bundle();
+        args.putInt("id", id);
+        phraseBookFragment.setArguments(args);
+        return phraseBookFragment;
     }
 }
