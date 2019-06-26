@@ -1,7 +1,9 @@
 package com.example.artem.phrasebook;
 
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -18,6 +20,7 @@ import com.example.artem.phrasebook.AlertDialog.AlertDialogWord;
 import com.example.artem.phrasebook.Fragment.DictionaryFragment;
 import com.example.artem.phrasebook.Fragment.PhraseBookThemeFragment;
 import com.example.artem.phrasebook.Fragment.TabFragment;
+import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,12 +37,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     DialogFragment dialogWord;
     DialogFragment dialogPhrase;
     DialogFragment dialogSE;
+    FirebaseAuth mAuth;
+    FirebaseAuth.AuthStateListener mAuthListner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        mAuthListner = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser()==null)
+                {
+                    startActivity(new Intent(MainActivity.this, SignInActivity.class));
+                }
+            }
+        };
+
         dialogWord = new AlertDialogWord();
         dialogPhrase = new AlertDialogPhrase();
         dialogSE = new AlertDialogSE();
@@ -64,6 +82,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (menuItem.getItemId() == R.id.nav_main) {
                     FragmentTransaction tfragmentTransaction = mFragmentManager.beginTransaction();
                     tfragmentTransaction.replace(R.id.containerView,new TabFragment()).addToBackStack(null).commit();
+                }
+
+                if (menuItem.getItemId() == R.id.nav_item_logout) {
+                    mAuth.signOut();
                 }
 
                 return false;
@@ -93,6 +115,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default:
                 break;
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListner);
     }
 
 }
