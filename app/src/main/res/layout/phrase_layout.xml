@@ -5,8 +5,7 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="10dp"
-    android:paddingTop="10dp"
+    android:paddingTop="5dp"
     tools:context="com.example.artem.phrasebook.MainActivity">
 
     <android.support.v7.widget.RecyclerView
