@@ -12,6 +12,8 @@ public class RecyclerItem {
         this.description = description;
     }
 
+    public RecyclerItem() {
+    }
 
     public int getId() {
         return id;

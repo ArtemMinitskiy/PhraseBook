@@ -28,10 +28,10 @@ public class AlertDialogDeleteWord extends DialogFragment implements View.OnClic
         super.setArguments(args);
     }
 
-    public static AlertDialogDeleteWord newInstance(int id){
+    public static AlertDialogDeleteWord newInstance(String id){
         AlertDialogDeleteWord alertDialogDelete = new AlertDialogDeleteWord();
         Bundle args = new Bundle();
-        args.putInt("id", id);
+        args.putString("id", id);
         alertDialogDelete.setArguments(args);
         return alertDialogDelete;
     }

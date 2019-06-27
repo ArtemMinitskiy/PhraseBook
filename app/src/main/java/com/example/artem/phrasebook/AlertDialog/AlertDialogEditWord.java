@@ -29,10 +29,10 @@ public class AlertDialogEditWord extends DialogFragment implements View.OnClickL
         super.setArguments(args);
     }
 
-    public static AlertDialogEditWord newInstance(int id){
+    public static AlertDialogEditWord newInstance(String id){
         AlertDialogEditWord alertDialogEdit = new AlertDialogEditWord();
         Bundle args = new Bundle();
-        args.putInt("id", id);
+        args.putString("id", id);
         alertDialogEdit.setArguments(args);
         return alertDialogEdit;
     }

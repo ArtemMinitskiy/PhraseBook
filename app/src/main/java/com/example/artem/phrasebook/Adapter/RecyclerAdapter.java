@@ -47,8 +47,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                         holder.Option.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                final DialogFragment deleteDialog = new AlertDialogDeleteWord().newInstance(s);
-                                final DialogFragment editDialog = new AlertDialogEditWord().newInstance(s);
+//                                final DialogFragment deleteDialog = new AlertDialogDeleteWord().newInstance(s);
+//                                final DialogFragment editDialog = new AlertDialogEditWord().newInstance(s);
                                 PopupMenu popupMenu = new PopupMenu(context, holder.Option);
                                 popupMenu.inflate(R.menu.optionmenu);
                                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -56,10 +56,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                                     public boolean onMenuItemClick(MenuItem item) {
                                         switch (item.getItemId()) {
                                             case R.id.edit:
-                                                editDialog.show(((AppCompatActivity) context).getFragmentManager(), "");
+//                                                editDialog.show(((AppCompatActivity) context).getFragmentManager(), "");
                                                 break;
                                             case R.id.delete:
-                                                deleteDialog.show(((AppCompatActivity) context).getFragmentManager(), "");
+//                                                deleteDialog.show(((AppCompatActivity) context).getFragmentManager(), "");
                                                 listItems.remove(position);
                                                 break;
                                             default:
