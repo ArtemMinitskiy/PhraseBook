@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.example.artem.phrasebook.Database.DatabaseHelper;
 import com.example.artem.phrasebook.R;
