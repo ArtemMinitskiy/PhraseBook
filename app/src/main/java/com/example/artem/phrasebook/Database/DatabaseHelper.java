@@ -5,21 +5,35 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.support.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ServerValue;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-private static String DB_NAME = "PhraseBook.sqlite";
+    private static String DB_NAME = "PhraseBook.sqlite";
     private static String DB_PATH = "";
     private static final int DB_VERSION = 1;
 
     public SQLiteDatabase mDataBase;
     private final Context mContext;
     private boolean mNeedUpdate = false;
+
+    private FirebaseUser mFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    private DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("Users");
 
     public DatabaseHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -101,4 +115,75 @@ private static String DB_NAME = "PhraseBook.sqlite";
     public Cursor QueryData(String query){
         return mDataBase.rawQuery(query,null);
     }
+
+    public void addItemWord(String engWord, String ukrWord) {
+
+        DatabaseReference wordRef = userReference
+                .child(mFirebaseUser.getEmail().replace(".", ","))
+                .child("Word")
+                .push();
+        final Map<String, Object> wordMap = new HashMap<>();
+        wordMap.put("ukrWord", ukrWord);
+        wordMap.put("engWord", engWord);
+        wordRef.setValue(wordMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+            }
+        });
+    }
+
+    public void addItemPhrase(String engPhrase, String ukrPhrase) {
+        DatabaseReference PhraseRef = userReference
+                .child(mFirebaseUser.getEmail().replace(".", ","))
+                .child("Phrase")
+                .push();
+        final Map<String, Object> PhraseMap = new HashMap<>();
+        PhraseMap.put("ukrPhrase", ukrPhrase);
+        PhraseMap.put("engPhrase", engPhrase);
+        PhraseRef.setValue(PhraseMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+            }
+        });
+    }
+
+    public void addItemSE(String engSE, String ukrSE) {
+        DatabaseReference sERef = userReference
+                .child(mFirebaseUser.getEmail().replace(".", ","))
+                .child("StableExpression")
+                .push();
+        final Map<String, Object> sEMap = new HashMap<>();
+        sEMap.put("ukrSE", ukrSE);
+        sEMap.put("engSE", engSE);
+        sERef.setValue(sEMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+            }
+        });
+    }
+
+    public void editItem(int id, String engTxt, String ukrTxt) {
+//        DatabaseReference sERef = userReference
+//                .child(mFirebaseUser.getEmail().replace(".", ","))
+//                .child("Word")
+//                .push();
+//        final Map<String, Object> sEMap = new HashMap<>();
+//        sEMap.put("ukrSE", ukrTxt);
+//        sEMap.put("engSE", engTxt);
+//        sERef.setValue(sEMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//
+//            }
+//        });
+    }
+
+    public void deleteItemById(int id) {
+
+    }
+
+
 }

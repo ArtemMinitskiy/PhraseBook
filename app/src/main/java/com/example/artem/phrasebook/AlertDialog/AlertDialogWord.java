@@ -2,6 +2,8 @@ package com.example.artem.phrasebook.AlertDialog;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,8 @@ import com.example.artem.phrasebook.R;
 public class AlertDialogWord extends DialogFragment implements View.OnClickListener{
     public DatabaseHelper databaseHelper;
     private String Eng, Ukr;
+    private EditText editEng, editUkr;
+    
     View view = null;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -25,13 +29,13 @@ public class AlertDialogWord extends DialogFragment implements View.OnClickListe
     }
 
     public void onClick(View v) {
-        EditText editText = (EditText) view.findViewById(R.id.editEng);
-        EditText editText2 = (EditText) view.findViewById(R.id.editUkr);
-        Eng = editText.getText().toString();
-        Ukr = editText2.getText().toString();
+        editEng = (EditText) view.findViewById(R.id.editEng);
+        editUkr = (EditText) view.findViewById(R.id.editUkr);
+        Eng = editEng.getText().toString();
+        Ukr = editUkr.getText().toString();
         switch (v.getId()) {
             case R.id.add:
-//                databaseHelper.addItemWord(Eng, Ukr);
+                databaseHelper.addItemWord(Eng, Ukr);
                 dismiss();
                 break;
             case R.id.cancel:

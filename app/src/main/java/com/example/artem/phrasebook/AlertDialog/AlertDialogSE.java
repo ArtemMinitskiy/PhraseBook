@@ -13,6 +13,7 @@ import com.example.artem.phrasebook.R;
 public class AlertDialogSE extends DialogFragment implements View.OnClickListener{
     public DatabaseHelper databaseHelper;
     private String Eng, Ukr;
+    private EditText editEng, editUkr;
     View view = null;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -24,13 +25,13 @@ public class AlertDialogSE extends DialogFragment implements View.OnClickListene
     }
 
     public void onClick(View v) {
-        EditText editText = (EditText) view.findViewById(R.id.editEng);
-        EditText editText2 = (EditText) view.findViewById(R.id.editUkr);
-        Eng = editText.getText().toString();
-        Ukr = editText2.getText().toString();
+        editEng = (EditText) view.findViewById(R.id.editEng);
+        editUkr = (EditText) view.findViewById(R.id.editUkr);
+        Eng = editEng.getText().toString();
+        Ukr = editUkr.getText().toString();
         switch (v.getId()) {
             case R.id.add:
-//                databaseHelper.addItemSE(Eng, Ukr);
+                databaseHelper.addItemSE(Eng, Ukr);
                 dismiss();
                 break;
             case R.id.cancel:
