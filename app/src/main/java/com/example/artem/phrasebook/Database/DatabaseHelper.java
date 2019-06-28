@@ -219,9 +219,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public void deleteItemById(int id) {
+    public void deleteItemById(String pageId, String id) {
+        switch (pageId) {
+            case "0":
+                DatabaseReference wordRef = userReference
+                        .child(mFirebaseUser.getEmail().replace(".", ","))
+                        .child("Word")
+                        .child(id);
+                wordRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
 
+                    }
+                });
+            case "1":
+                DatabaseReference PhraseRef = userReference
+                        .child(mFirebaseUser.getEmail().replace(".", ","))
+                        .child("Phrase")
+                        .child(id);
+                PhraseRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                    }
+                });
+                break;
+            case "2":
+                DatabaseReference wordSE = userReference
+                        .child(mFirebaseUser.getEmail().replace(".", ","))
+                        .child("StableExpression")
+                        .child(id);
+                wordSE.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                    }
+                });
+                break;
+            default:
+                break;
+
+        }
     }
-
-
 }

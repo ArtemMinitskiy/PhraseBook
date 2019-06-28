@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.artem.phrasebook.AlertDialog.AlertDialogDeleteWord;
 import com.example.artem.phrasebook.AlertDialog.AlertDialogEditWord;
+import com.example.artem.phrasebook.Model.Phrase;
 import com.example.artem.phrasebook.Model.Word;
 import com.example.artem.phrasebook.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -74,23 +75,22 @@ public class PhraseFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseRecyclerOptions<Word> options =
-                new FirebaseRecyclerOptions.Builder<Word>()
-                        .setQuery(phraseReference, Word.class)
+        FirebaseRecyclerOptions<Phrase> options =
+                new FirebaseRecyclerOptions.Builder<Phrase>()
+                        .setQuery(phraseReference, Phrase.class)
                         .build();
 
-        FirebaseRecyclerAdapter adapter = new FirebaseRecyclerAdapter<Word, ViewHolder>(options) {
+        FirebaseRecyclerAdapter adapter = new FirebaseRecyclerAdapter<Phrase, ViewHolder>(options) {
 
             @Override
-            protected void onBindViewHolder(@NonNull final ViewHolder holder, int position, @NonNull final Word word) {
+            protected void onBindViewHolder(@NonNull final ViewHolder holder, int position, @NonNull final Phrase phrase) {
                 final String wordId = getRef(position).getKey();
                 phraseReference.child(wordId).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String ukrPhrase = dataSnapshot.child("ukrPhrase").getValue().toString();
-                        String engPhrase = dataSnapshot.child("engPhrase").getValue().toString();
-                        holder.txtEng.setText(engPhrase);
-                        holder.txtUkr.setText(ukrPhrase);
+                        holder.txtEng.setText(phrase.getEngPhrase());
+                        holder.txtUkr.setText(phrase.getUkrPhrase());
+
                     }
 
                     @Override
@@ -102,7 +102,7 @@ public class PhraseFragment extends Fragment {
                 holder.Option.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        final DialogFragment deleteDialog = new AlertDialogDeleteWord().newInstance(wordId);
+                        final DialogFragment deleteDialog = new AlertDialogDeleteWord().newInstance(wordId, "1");
                         final DialogFragment editDialog = new AlertDialogEditWord().newInstance(wordId, "1");
                         PopupMenu popupMenu = new PopupMenu(getContext(), holder.Option);
                         popupMenu.inflate(R.menu.optionmenu);

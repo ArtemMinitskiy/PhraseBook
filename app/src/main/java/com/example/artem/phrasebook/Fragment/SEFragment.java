@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.artem.phrasebook.AlertDialog.AlertDialogDeleteWord;
 import com.example.artem.phrasebook.AlertDialog.AlertDialogEditWord;
+import com.example.artem.phrasebook.Model.StableExpression;
 import com.example.artem.phrasebook.Model.Word;
 import com.example.artem.phrasebook.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -74,23 +76,21 @@ public class SEFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseRecyclerOptions<Word> options =
-                new FirebaseRecyclerOptions.Builder<Word>()
-                        .setQuery(sEReference, Word.class)
+        FirebaseRecyclerOptions<StableExpression> options =
+                new FirebaseRecyclerOptions.Builder<StableExpression>()
+                        .setQuery(sEReference, StableExpression.class)
                         .build();
 
-        FirebaseRecyclerAdapter adapter = new FirebaseRecyclerAdapter<Word, ViewHolder>(options) {
+        FirebaseRecyclerAdapter adapter = new FirebaseRecyclerAdapter<StableExpression, ViewHolder>(options) {
 
             @Override
-            protected void onBindViewHolder(@NonNull final ViewHolder holder, int position, @NonNull final Word word) {
+            protected void onBindViewHolder(@NonNull final ViewHolder holder, int position, @NonNull final StableExpression expression) {
                 final String wordId = getRef(position).getKey();
                 sEReference.child(wordId).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String ukrPhrase = dataSnapshot.child("ukrSE").getValue().toString();
-                        String engPhrase = dataSnapshot.child("engSE").getValue().toString();
-                        holder.txtEng.setText(engPhrase);
-                        holder.txtUkr.setText(ukrPhrase);
+                        holder.txtEng.setText(expression.getEngSE());
+                        holder.txtUkr.setText(expression.getUkrSE());
                     }
 
                     @Override
@@ -102,7 +102,7 @@ public class SEFragment extends Fragment {
                 holder.Option.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        final DialogFragment deleteDialog = new AlertDialogDeleteWord().newInstance(wordId);
+                        final DialogFragment deleteDialog = new AlertDialogDeleteWord().newInstance(wordId, "2");
                         final DialogFragment editDialog = new AlertDialogEditWord().newInstance(wordId, "2");
                         PopupMenu popupMenu = new PopupMenu(getContext(), holder.Option);
                         popupMenu.inflate(R.menu.optionmenu);

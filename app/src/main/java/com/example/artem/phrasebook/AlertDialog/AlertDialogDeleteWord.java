@@ -28,19 +28,21 @@ public class AlertDialogDeleteWord extends DialogFragment implements View.OnClic
         super.setArguments(args);
     }
 
-    public static AlertDialogDeleteWord newInstance(String id){
+    public static AlertDialogDeleteWord newInstance(String itemId, String pageId){
         AlertDialogDeleteWord alertDialogDelete = new AlertDialogDeleteWord();
         Bundle args = new Bundle();
-        args.putString("id", id);
+        args.putString("itemId", itemId);
+        args.putString("pageId", pageId);
         alertDialogDelete.setArguments(args);
         return alertDialogDelete;
     }
 
     public void onClick(View v) {
-        int id = getArguments().getInt("id");
+        String itemId = getArguments().getString("itemId");
+        String pageId = getArguments().getString("pageId");
         switch (v.getId()) {
             case R.id.delete:
-                databaseHelper.deleteItemById(id);
+                databaseHelper.deleteItemById(pageId, itemId);
                 dismiss();
                 break;
             case R.id.cancel:

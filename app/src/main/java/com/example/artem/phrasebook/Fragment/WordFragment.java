@@ -99,7 +99,7 @@ public class WordFragment extends Fragment {
                 holder.Option.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        final DialogFragment deleteDialog = new AlertDialogDeleteWord().newInstance(wordId);
+                        final DialogFragment deleteDialog = new AlertDialogDeleteWord().newInstance(wordId, "0");
                         final DialogFragment editDialog = new AlertDialogEditWord().newInstance(wordId, "0");
                         PopupMenu popupMenu = new PopupMenu(getContext(), holder.Option);
                         popupMenu.inflate(R.menu.optionmenu);
