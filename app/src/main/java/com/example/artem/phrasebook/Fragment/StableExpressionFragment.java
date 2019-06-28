@@ -32,7 +32,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class SEFragment extends Fragment {
+public class StableExpressionFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private DatabaseReference sEReference;
@@ -46,7 +46,7 @@ public class SEFragment extends Fragment {
 
     private String currentUserId;
 
-    public SEFragment() {
+    public StableExpressionFragment() {
     }
 
     @Nullable

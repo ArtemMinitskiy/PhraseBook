@@ -10,7 +10,7 @@ import android.widget.EditText;
 import com.example.artem.phrasebook.Database.DatabaseHelper;
 import com.example.artem.phrasebook.R;
 
-public class AlertDialogSE extends DialogFragment implements View.OnClickListener{
+public class AlertDialogStableExpression extends DialogFragment implements View.OnClickListener{
     public DatabaseHelper databaseHelper;
     private String Eng, Ukr;
     private EditText editEng, editUkr;
@@ -21,17 +21,19 @@ public class AlertDialogSE extends DialogFragment implements View.OnClickListene
         view = inflater.inflate(R.layout.add_dialog, null);
         view.findViewById(R.id.add).setOnClickListener(this);
         view.findViewById(R.id.cancel).setOnClickListener(this);
+        editEng = (EditText) view.findViewById(R.id.editEng);
+        editUkr = (EditText) view.findViewById(R.id.editUkr);
         return view;
     }
 
     public void onClick(View v) {
-        editEng = (EditText) view.findViewById(R.id.editEng);
-        editUkr = (EditText) view.findViewById(R.id.editUkr);
         Eng = editEng.getText().toString();
         Ukr = editUkr.getText().toString();
         switch (v.getId()) {
             case R.id.add:
                 databaseHelper.addItemSE(Eng, Ukr);
+                editEng.setText("");
+                editUkr.setText("");
                 dismiss();
                 break;
             case R.id.cancel:

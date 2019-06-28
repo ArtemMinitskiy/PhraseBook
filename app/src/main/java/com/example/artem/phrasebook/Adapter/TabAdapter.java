@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.artem.phrasebook.Fragment.PhraseFragment;
-import com.example.artem.phrasebook.Fragment.SEFragment;
+import com.example.artem.phrasebook.Fragment.StableExpressionFragment;
 import com.example.artem.phrasebook.Fragment.WordFragment;
 
 
@@ -21,7 +21,7 @@ public class TabAdapter extends FragmentPagerAdapter {
         switch (position){
             case 0 : return new WordFragment();
             case 1 : return new PhraseFragment();
-            case 2 : return new SEFragment();
+            case 2 : return new StableExpressionFragment();
         }
         return null;
     }

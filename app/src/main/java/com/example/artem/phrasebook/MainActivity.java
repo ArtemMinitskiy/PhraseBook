@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.artem.phrasebook.AlertDialog.AlertDialogPhrase;
-import com.example.artem.phrasebook.AlertDialog.AlertDialogSE;
+import com.example.artem.phrasebook.AlertDialog.AlertDialogStableExpression;
 import com.example.artem.phrasebook.AlertDialog.AlertDialogWord;
 import com.example.artem.phrasebook.Fragment.DictionaryFragment;
 import com.example.artem.phrasebook.Fragment.PhraseBookThemeFragment;
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         dialogWord = new AlertDialogWord();
         dialogPhrase = new AlertDialogPhrase();
-        dialogSE = new AlertDialogSE();
+        dialogSE = new AlertDialogStableExpression();
 
         View navHeaderView = mNavigationView.getHeaderView(0);
 
