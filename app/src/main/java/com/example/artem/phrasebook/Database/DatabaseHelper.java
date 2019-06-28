@@ -6,6 +6,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -165,20 +166,57 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         });
     }
 
-    public void editItem(int id, String engTxt, String ukrTxt) {
-//        DatabaseReference sERef = userReference
-//                .child(mFirebaseUser.getEmail().replace(".", ","))
-//                .child("Word")
-//                .push();
-//        final Map<String, Object> sEMap = new HashMap<>();
-//        sEMap.put("ukrSE", ukrTxt);
-//        sEMap.put("engSE", engTxt);
-//        sERef.setValue(sEMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-//            @Override
-//            public void onComplete(@NonNull Task<Void> task) {
-//
-//            }
-//        });
+    public void editItem(String pageId, String id, String engTxt, String ukrTxt) {
+        switch (pageId){
+            case "0":
+                DatabaseReference wordRef = userReference
+                        .child(mFirebaseUser.getEmail().replace(".", ","))
+                        .child("Word")
+                        .child(id);
+                final Map<String, Object> wordMap = new HashMap<>();
+                wordMap.put("ukrWord", ukrTxt);
+                wordMap.put("engWord", engTxt);
+                wordRef.setValue(wordMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                    }
+                });
+            case "1":
+                DatabaseReference PhraseRef = userReference
+                        .child(mFirebaseUser.getEmail().replace(".", ","))
+                        .child("Phrase")
+                        .child(id);
+                final Map<String, Object> PhraseMap = new HashMap<>();
+                PhraseMap.put("ukrPhrase", ukrTxt);
+                PhraseMap.put("engPhrase", engTxt);
+                PhraseRef.setValue(PhraseMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                    }
+                });
+                break;
+            case "2":
+                DatabaseReference wordSE = userReference
+                        .child(mFirebaseUser.getEmail().replace(".", ","))
+                        .child("StableExpression")
+                        .child(id);
+                final Map<String, Object> sEMap = new HashMap<>();
+                sEMap.put("ukrSE", ukrTxt);
+                sEMap.put("engSE", engTxt);
+                wordSE.setValue(sEMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                    }
+                });
+                break;
+            default:
+                break;
+
+        }
+
     }
 
     public void deleteItemById(int id) {
